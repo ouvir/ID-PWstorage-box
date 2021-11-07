@@ -1,7 +1,6 @@
 from tkinter import *
 import Add_Btn
 import Copy_Btn
-
 root = Tk()
 root.title("ID&PW_Storage_Box")
 root.geometry("640x480+300+200") #가로 * 세로
@@ -32,7 +31,6 @@ ID_PW_box.config(font = (None, 15))
 ID_PW_box.place(width = 200, height = 50, x= 400, y=35) # 그리기
 
 
-
 # Load_Button
 def Loading_Id_Pw():
     try:
@@ -48,13 +46,14 @@ def Loading_Id_Pw():
 load_btn = Button(root, text="Load",command = Loading_Id_Pw)
 load_btn.place(width= 100, height=50, x=420, y=420)
 
-# Copy_Button
-copy_btn = Button(root, text ="Copy", command=Copy_Btn.Copy) # 복사 버튼
+
+# copy_Button
+copy_btn = Button(root, text ="Copy", command=Copy_Btn.COPY) # 복사 버튼
 copy_btn.place(width= 100, height=50, x=530, y=420)
 
 # Add_list
-copy_btn = Button(root, text ="Add", command=Add_Btn.ADD) # 추가 버튼
-copy_btn.place(width= 100, height=50, x=420, y=360)
+add_btn = Button(root, text ="Add", command=Add_Btn.ADD) # 추가 버튼
+add_btn.place(width= 100, height=50, x=420, y=360)
 
 #Lable
 label_ID = Label(root, text="ID:")
