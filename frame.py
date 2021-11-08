@@ -9,17 +9,17 @@ root.geometry("640x480+300+200") #가로 * 세로
 root.resizable(False, False) # 각각 x,y 값 변경불가(창 크기 변경 불가)
 
 # ID와 Password를 저장 할 공간
-Login_dict = {}
-Login_dict["naver"] = ["naver_id","naver_password"]
-Login_dict["google"] = ["google_id","google_password"]
-Login_dict["youtube"] = ["youtube_id","youtube_password"]
-with open('login_file.txt','w',encoding = 'utf8') as login_file:
-    for idx, value in enumerate(Login_dict.values()):
-        print("----------------", file= login_file)
-        print("{0}".format(list(Login_dict.keys())[idx]), file= login_file)
-        for login_inf in value:
-            print(str(login_inf), file = login_file)
-# 위의 파일 저장
+# Login_dict = {}
+# Login_dict["naver"] = ["naver_id","naver_password"]
+# Login_dict["google"] = ["google_id","google_password"]
+# Login_dict["youtube"] = ["youtube_id","youtube_password"]
+# with open('login_file.txt','w',encoding = 'utf8') as login_file:
+#     for idx, value in enumerate(Login_dict.values()):
+#         print("----------------", file= login_file)
+#         print("{0}".format(list(Login_dict.keys())[idx]), file= login_file)
+#         for login_inf in value:
+#             print(str(login_inf), file = login_file)
+# # 위의 파일 저장
 
 # Listbox 1 (see the name)
 storage_box = Listbox(root, selectmode ="single", height = 0) #storage_box 기본정보
@@ -48,8 +48,6 @@ def Loading_Id_Pw():
     try:
         ID_PW_box.delete(0,END) # 과거 load한 ID&PW 지우기
         select_idx = storage_box.curselection() # storage_box 에서 선택된 항목의 value 값 가져옴.
-        # ID = Login_dict[storage_box.get(select_idx)][0]
-        # PW = Login_dict[storage_box.get(select_idx)][1]
         with open('login_file.txt','r',encoding = 'utf8') as login_file:
             login_list = login_file.readlines()
             point_idx = login_list.index(storage_box.get(select_idx))
@@ -72,10 +70,22 @@ load_btn = Button(root, text="Load",command = Loading_Id_Pw)
 load_btn.place(width= 100, height=50, x=420, y=420)
 
 
+def Reload():
+    storage_box.delete(0,END)
+    login_file = open('login_file.txt','r',encoding = 'utf8')
+    login_list = login_file.readlines() # file에 저장된 정보를 리스트의 형태로 불러옴 
+    for idx,name in enumerate(login_list): # 리스트의 번호와 값을 같이 받아옴
+        if idx % 4 == 1: # 리스트에서 이름의 정보를 담고있는 항목만 실행
+            storage_box.insert(0,name) # storage_box에 이름 정보 삽입
+
 # Add_list
-add_btn = Button(root, text ="Add", command=Add_Btn.ADD) # 추가 버튼
+add_btn = Button(root, text ="Add", command= Add_Btn.ADD) # 추가 버튼
 add_btn.place(width= 100, height=50, x=420, y=360)
 
+# list_refresh
+refresh_icon = PhotoImage(file="C:/Users/kilhy/projects/git/refresh_icon.png")
+refresh_btn = Button(root, image= refresh_icon , command= Reload) # 새로고침버튼
+refresh_btn.place(width= 50, height=50, x=300, y=385)
 #Lable_ID
 label_ID = Label(root, text="ID:")
 label_ID.config(font = (None, 10, 'bold'))
