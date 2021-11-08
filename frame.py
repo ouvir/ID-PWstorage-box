@@ -31,6 +31,7 @@ ID_PW_box.config(font = (None, 15))
 ID_PW_box.place(width = 200, height = 50, x= 400, y=35) # 그리기
 
 
+
 # Load_Button
 def Loading_Id_Pw():
     try:
@@ -38,18 +39,23 @@ def Loading_Id_Pw():
         select = storage_box.curselection() # storage_box 에서 선택된 항목의 value 값 가져옴.
         ID = Login_dict[storage_box.get(select)][0]
         PW = Login_dict[storage_box.get(select)][1]
+        
         ID_PW_box.insert(0,ID)
         ID_PW_box.insert(1,PW)
+
+        # ID_copy_Button
+        copy_btn = Button(root, text ="ID_Copy", command = lambda X=ID : Copy_Btn.COPY(X)) # 복사 버튼
+        copy_btn.place(width= 100, height=50, x=530, y=360)
+
+        # PW_copy_BUtton
+        copy_btn = Button(root, text ="PW_Copy", command = lambda X=PW : Copy_Btn.COPY(PW)) # 복사 버튼
+        copy_btn.place(width= 100, height=50, x=530, y=420)
     except:
         pass
 
 load_btn = Button(root, text="Load",command = Loading_Id_Pw)
 load_btn.place(width= 100, height=50, x=420, y=420)
 
-
-# copy_Button
-copy_btn = Button(root, text ="Copy", command=Copy_Btn.COPY) # 복사 버튼
-copy_btn.place(width= 100, height=50, x=530, y=420)
 
 # Add_list
 add_btn = Button(root, text ="Add", command=Add_Btn.ADD) # 추가 버튼

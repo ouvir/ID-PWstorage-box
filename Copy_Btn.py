@@ -1,6 +1,7 @@
 import clipboard
-def COPY():
+def COPY(content):
     try:
-        clipboard.copy("0")
+        str(content)
+        clipboard.copy(content)
     except:
         pass   
