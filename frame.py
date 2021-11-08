@@ -13,35 +13,50 @@ Login_dict = {}
 Login_dict["naver"] = ["naver_id","naver_password"]
 Login_dict["google"] = ["google_id","google_password"]
 Login_dict["youtube"] = ["youtube_id","youtube_password"]
-# 다른 파일에서 로드해올수있어야함.
+with open('login_file.txt','w',encoding = 'utf8') as login_file:
+    for idx, value in enumerate(Login_dict.values()):
+        print("----------------", file= login_file)
+        print("{0}".format(list(Login_dict.keys())[idx]), file= login_file)
+        for login_inf in value:
+            print(str(login_inf), file = login_file)
+# 위의 파일 저장
 
-
+# Listbox 1 (see the name)
 storage_box = Listbox(root, selectmode ="single", height = 0) #storage_box 기본정보
 
-for name in list(Login_dict.keys()): # Login_dict에서 키 값(저장이름)을 가져 옴. 
-    storage_box.insert(0,name) # 가장 위에 저장.
+login_file = open('login_file.txt','r',encoding = 'utf8')
+login_list = login_file.readlines() # file에 저장된 정보를 리스트의 형태로 불러옴 
+for idx,name in enumerate(login_list): # 리스트의 번호와 값을 같이 받아옴
+    if idx % 4 == 1: # 리스트에서 이름의 정보를 담고있는 항목만 실행
+        storage_box.insert(0,name) # storage_box에 이름 정보 삽입
+login_file.close() # 파일 닫기
+
 storage_box.config(font = (None, 18, 'bold')) # 폰트 크기 지정
 storage_box.place(width = 300, height = 400, x=50, y=35) # 그리기
 
 select = storage_box.curselection()
 # select : storage_box에서 선택된 항목의 순서를 저장
 
+# Listbox 2 (if click the Load_Button, can see the ID,PW)
 ID_PW_box = Listbox(root, selectmode ="single", height = 0) # ID_PW_box 기본정보
 ID_PW_box.config(font = (None, 15))
 ID_PW_box.place(width = 200, height = 50, x= 400, y=35) # 그리기
-
 
 
 # Load_Button
 def Loading_Id_Pw():
     try:
         ID_PW_box.delete(0,END) # 과거 load한 ID&PW 지우기
-        select = storage_box.curselection() # storage_box 에서 선택된 항목의 value 값 가져옴.
-        ID = Login_dict[storage_box.get(select)][0]
-        PW = Login_dict[storage_box.get(select)][1]
-        
-        ID_PW_box.insert(0,ID)
-        ID_PW_box.insert(1,PW)
+        select_idx = storage_box.curselection() # storage_box 에서 선택된 항목의 value 값 가져옴.
+        # ID = Login_dict[storage_box.get(select_idx)][0]
+        # PW = Login_dict[storage_box.get(select_idx)][1]
+        with open('login_file.txt','r',encoding = 'utf8') as login_file:
+            login_list = login_file.readlines()
+            point_idx = login_list.index(storage_box.get(select_idx))
+            ID = login_list[point_idx+1]
+            PW = login_list[point_idx+2]
+            ID_PW_box.insert(0,ID)
+            ID_PW_box.insert(1,PW)
 
         # ID_copy_Button
         copy_btn = Button(root, text ="ID_Copy", command = lambda X=ID : Copy_Btn.COPY(X)) # 복사 버튼
@@ -61,11 +76,11 @@ load_btn.place(width= 100, height=50, x=420, y=420)
 add_btn = Button(root, text ="Add", command=Add_Btn.ADD) # 추가 버튼
 add_btn.place(width= 100, height=50, x=420, y=360)
 
-#Lable
+#Lable_ID
 label_ID = Label(root, text="ID:")
 label_ID.config(font = (None, 10, 'bold'))
 label_ID.place(x=355,y=35)
-
+#Label_PW
 label_PW = Label(root, text="PW:")
 label_PW.config(font = (None, 10, 'bold'))
 label_PW.place(x=355,y=60)
