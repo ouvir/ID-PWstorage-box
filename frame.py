@@ -49,7 +49,7 @@ def Loading_Id_Pw():
         copy_btn.place(width= 100, height=50, x=530, y=360)
 
         # PW_copy_BUtton
-        copy_btn = Button(root, text ="PW_Copy", command = lambda X=PW : Copy_Btn.COPY(PW)) # 복사 버튼
+        copy_btn = Button(root, text ="PW_Copy", command = lambda X=PW : Copy_Btn.COPY(X)) # 복사 버튼
         copy_btn.place(width= 100, height=50, x=530, y=420)
     except:
         pass
