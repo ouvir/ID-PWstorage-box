@@ -8,18 +8,6 @@ root.geometry("640x480+300+200") #가로 * 세로
 
 root.resizable(False, False) # 각각 x,y 값 변경불가(창 크기 변경 불가)
 
-# ID와 Password를 저장 할 공간
-# Login_dict = {}
-# Login_dict["naver"] = ["naver_id","naver_password"]
-# Login_dict["google"] = ["google_id","google_password"]
-# Login_dict["youtube"] = ["youtube_id","youtube_password"]
-# with open('login_file.txt','w',encoding = 'utf8') as login_file:
-#     for idx, value in enumerate(Login_dict.values()):
-#         print("----------------", file= login_file)
-#         print("{0}".format(list(Login_dict.keys())[idx]), file= login_file)
-#         for login_inf in value:
-#             print(str(login_inf), file = login_file)
-# # 위의 파일 저장
 
 # Listbox 1 (see the name)
 storage_box = Listbox(root, selectmode ="single", height = 0) #storage_box 기본정보

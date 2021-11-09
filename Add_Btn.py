@@ -1,28 +1,40 @@
 from tkinter import *
 import tkinter.messagebox
 
+# Tab키로 다음 칸 이동
+def focus_next_widget(event):
+    event.widget.tk_focusNext().focus()
+    return("break")
+
 def ADD():
-        # 새로운 창 띄우기
+    # 새로운 창 띄우기
     root2 = Tk()
     root2.title("ID&PW_ADD")
     root2.geometry("320x240+480+320")
     root2.resizable(False, False)
 
     ##make_input
-    # ID_input
-    ID_input = Text(root2, width = 30, height =5)
-    ID_input.config(font = (None, 15, 'bold'))
-    ID_input.place(width= 220, height=40, x=80, y=90)
-    # PW_input
-    PW_input= Text(root2, width = 30, height =5)
-    PW_input.config(font = (None, 15, 'bold'))
-    PW_input.place(width= 220, height=40, x=80, y=140)
     # NAME_input
     NAME_input= Text(root2, width = 30, height =5)
     NAME_input.config(font = (None, 20, 'bold'))
     NAME_input.place(width= 220, height=40, x=80, y=20)
+    NAME_input.bind("<Tab>",focus_next_widget)
+    # ID_input
+    ID_input = Text(root2, width = 30, height =5)
+    ID_input.config(font = (None, 15, 'bold'))
+    ID_input.place(width= 220, height=40, x=80, y=90)
+    ID_input.bind("<Tab>",focus_next_widget)
+    # PW_input
+    PW_input= Text(root2, width = 30, height =5)
+    PW_input.config(font = (None, 15, 'bold'))
+    PW_input.place(width= 220, height=40, x=80, y=140)
+    PW_input.bind("<Tab>",focus_next_widget)
 
     ##make_label
+    #Label_NAME
+    label_NAME = Label(root2, text="NAME:")
+    label_NAME.config(font = (None, 10, 'bold'))
+    label_NAME.place(x=20,y=30)
     #Lable_ID
     label_ID = Label(root2, text="ID:")
     label_ID.config(font = (None, 15, 'bold')) 
@@ -31,10 +43,6 @@ def ADD():
     label_PW = Label(root2, text="PW:")
     label_PW.config(font = (None, 15, 'bold'))
     label_PW.place(x=20,y=140)
-    #Label_NAME
-    label_NAME = Label(root2, text="NAME:")
-    label_NAME.config(font = (None, 10, 'bold'))
-    label_NAME.place(x=20,y=30)
 
     def Append_File():
         try:
