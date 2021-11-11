@@ -1,6 +1,8 @@
 from tkinter import *
 import tkinter.messagebox
 
+
+
 # Tab키로 다음 칸 이동
 def focus_next_widget(event):
     event.widget.tk_focusNext().focus()
@@ -69,5 +71,4 @@ def ADD():
         
     Add_btn = Button(root2, text ="Add the List", command = Append_File)
     Add_btn.place(width= 100, height=50, x=110, y=190)
-    print(NAME_input.get("1.0", END),end='')
     root2.mainloop()
