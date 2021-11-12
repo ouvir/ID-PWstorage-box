@@ -1,6 +1,6 @@
-from os import read
 from tkinter import *
 from tkinter import font
+import copy
 import clipboard
 import tkinter.messagebox
 
@@ -92,7 +92,11 @@ class M_Button(file_load):
             self.fnc = self.Append_file
             self.btn = Button(self.root, text = self.name, \
                 command = lambda x=ID_PW[0], y=ID_PW[1], z=ID_PW[2] :self.fnc(x, y, z))
-
+        
+        elif fnc == "DEL":
+            self.fnc = self.DEL
+            self.btn = Button(self.root, text = self.name, command = self.fnc)
+    
     def drow(self): #그리기
         self.btn.place(width= self.width, height = self.height, x=self.x, y=self.y)
 
@@ -115,6 +119,7 @@ class M_Button(file_load):
             copy_id_btn.drow()
             copy_pw_btn = M_Button(main_root.root, "PW_Copy", 100, 50, 530, 420,"COPY",PW)
             copy_pw_btn.drow()
+
         except:
             pass
 
@@ -158,7 +163,29 @@ class M_Button(file_load):
         Append_btn.drow()
         
         sub_root.loop_end()
-           
+    
+    def DEL(self):
+        try:
+            select_idx = self.read_box.curselection() 
+            # storage_box 에서 선택된 항목의 value 값 가져옴.
+            file = file_load()
+            login_list = file.read()
+            login_list = list(login_list)
+            point_idx = login_list.index(self.read_box.get(select_idx))
+            del login_list[point_idx-1]
+            del login_list[point_idx-1]
+            del login_list[point_idx-1]
+            del login_list[point_idx-1]
+            with open("login_file.txt","w",encoding="utf8") as login_file:
+                for data in login_list:
+                    print(data,file=login_file,end='')
+                    
+            tkinter.messagebox.showinfo("delete","삭제되었습니다")
+        except:
+            tkinter.messagebox.showerror("error","다시시도해주세요")
+        finally:
+            Reload(storage_box)
+
 class M_Label:
     def __init__(self, root, name, font_size,x_pos, y_pos):
         self.root = root
@@ -218,6 +245,10 @@ Load_btn.drow()
 
 Add_btn = M_Button(main_root.root,"Add", 100, 50, 420, 360, "ADD")
 Add_btn.drow()
+
+Del_btn = M_Button(main_root.root, "Delete", 100, 50, 530, 300,"DEL")
+Del_btn.read_box = storage_box.list_box
+Del_btn.drow()
 
 #Lable_ID_PW
 label_ID = M_Label(main_root.root,"ID:", 10, 355, 35)
