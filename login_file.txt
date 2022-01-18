@@ -1,0 +1,12 @@
+----------------
+google
+google_id
+google_password
+----------------
+naver
+naver_id
+naver_password
+----------------
+youtube
+youtube_id
+youtube_password

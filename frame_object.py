@@ -19,7 +19,7 @@ class M_Root:
 
 class file_load:
     def read(self):
-        with open("login_file.txt", "r",encoding= "utf8") as file:
+        with open("git\\login_file.txt", "r",encoding= "utf8") as file:
             file_list = file.readlines()
         return file_list
 
@@ -36,7 +36,7 @@ class file_load:
                 tkinter.messagebox.showerror("error","다시 입력해주세요")
 
             else:
-                with open("login_file.txt","a",encoding="utf8") as login_file:
+                with open("git\\login_file.txt","a",encoding="utf8") as login_file:
                     print("----------------", file= login_file)
                     print(NAME.get("1.0", END),file=login_file,end='')
                     NAME.delete("1.0",END) # 모든 텍스트 지우기
@@ -176,7 +176,7 @@ class M_Button(file_load):
             del login_list[point_idx-1]
             del login_list[point_idx-1]
             del login_list[point_idx-1]
-            with open("login_file.txt","w",encoding="utf8") as login_file:
+            with open("git\\login_file.txt","w",encoding="utf8") as login_file:
                 for data in login_list:
                     print(data,file=login_file,end='')
                     

@@ -12,7 +12,7 @@ root.resizable(False, False) # 각각 x,y 값 변경불가(창 크기 변경 불
 # Listbox 1 (see the name)
 storage_box = Listbox(root, selectmode ="single", height = 0) #storage_box 기본정보
 
-login_file = open('login_file.txt','r',encoding = 'utf8')
+login_file = open('git\\login_file.txt','r',encoding = 'utf8')
 login_list = login_file.readlines() # file에 저장된 정보를 리스트의 형태로 불러옴 
 for idx,name in enumerate(login_list): # 리스트의 번호와 값을 같이 받아옴
     if idx % 4 == 1: # 리스트에서 이름의 정보를 담고있는 항목만 실행
