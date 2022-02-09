@@ -36,7 +36,7 @@ def Loading_Id_Pw():
     try:
         ID_PW_box.delete(0,END) # 과거 load한 ID&PW 지우기
         select_idx = storage_box.curselection() # storage_box 에서 선택된 항목의 value 값 가져옴.
-        with open('login_file.txt','r',encoding = 'utf8') as login_file:
+        with open('git//login_file.txt','r',encoding = 'utf8') as login_file:
             login_list = login_file.readlines()
             point_idx = login_list.index(storage_box.get(select_idx))
             ID = login_list[point_idx+1]
@@ -60,7 +60,7 @@ load_btn.place(width= 100, height=50, x=420, y=420)
 
 def Reload():
     storage_box.delete(0,END)
-    login_file = open('login_file.txt','r',encoding = 'utf8')
+    login_file = open('git//login_file.txt','r',encoding = 'utf8')
     login_list = login_file.readlines() # file에 저장된 정보를 리스트의 형태로 불러옴 
     for idx,name in enumerate(login_list): # 리스트의 번호와 값을 같이 받아옴
         if idx % 4 == 1: # 리스트에서 이름의 정보를 담고있는 항목만 실행
